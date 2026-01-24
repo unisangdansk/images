@@ -139,11 +139,14 @@
         .copy-btn:hover { background-color: #4a4a8d; }
         .copy-btn.copied { background-color: #28a745; }
 
-        .file-link {
+.file-link {
     text-decoration: none;
-    display: block;
-    margin-bottom: 0;
+    display: block;      /* To sprawia, że link obejmuje całą szerokość */
+    margin-top: 0;       /* KLUCZ: Usuwa pustą przestrzeń nad linkiem */
+    margin-bottom: 10px; /* Zostawiamy tak jak chciałeś - odstęp od przycisku */
+    line-height: 1;      /* Ściślej trzyma tekst, by nie "puchł" w pionie */
 }
+
 .file-link:hover .file-name {
     color: var(--unisan-blue);
     text-decoration: underline;
