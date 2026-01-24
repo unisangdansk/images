@@ -141,10 +141,9 @@
 
 .file-link {
     text-decoration: none;
-    display: block;      /* To sprawia, że link obejmuje całą szerokość */
-    margin-top: 0;       /* KLUCZ: Usuwa pustą przestrzeń nad linkiem */
-    margin-bottom: 10px; /* Zostawiamy tak jak chciałeś - odstęp od przycisku */
-    line-height: 1;      /* Ściślej trzyma tekst, by nie "puchł" w pionie */
+    display: inline-block; /* Zmienione z block na inline-block */
+    margin: 0;             /* Całkowite wyzerowanie */
+    padding: 0;            /* Całkowite wyzerowanie */
 }
 
 .file-link:hover .file-name {
