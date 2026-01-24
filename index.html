@@ -139,17 +139,6 @@
         .copy-btn:hover { background-color: #4a4a8d; }
         .copy-btn.copied { background-color: #28a745; }
 
-.file-link {
-    text-decoration: none;
-    display: inline-block; /* Zmienione z block na inline-block */
-    margin: 0;             /* Całkowite wyzerowanie */
-    padding: 0;            /* Całkowite wyzerowanie */
-}
-
-.file-link:hover .file-name {
-    color: var(--unisan-blue);
-    text-decoration: underline;
-}
     </style>
 </head>
 <body>
@@ -177,7 +166,7 @@
             <div class="gallery-item">
                 <a href="https://unisan.net.pl" target="_blank" title="Przejdź do sklepu">
                 <img src="kalyxx-active.webp" alt="Kalyxx Active"></a>
-                <a href="https://unisan.net.pl" target="_blank" class="file-link">
+                <a href="https://unisan.net.pl" target="_blank">
                 <span class="file-name">kalyxx-active.webp</span></a>
                 <button class="copy-btn" onclick="copyToClipboard(this, 'https://unisan-gdansk.netlify.app/kalyxx-active.webp')">Kopiuj URL</button>
             </div>
