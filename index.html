@@ -25,39 +25,76 @@
             width: 100%;
             height: 180px;
             object-fit: cover;
-            /* To sprawi, że obraz wypełni obszar, zachowując proporcje */
             object-position: bottom;
-            /* Kadruje do środka (możesz wpisać 'top' lub 'bottom') */
             display: block;
         }
+
+        /* --- NAPRAWIONA SEKCJA LOGO --- */
 
         .brand-link {
             text-decoration: none;
             color: var(--unisan-blue);
             display: inline-block;
             margin: 5px 0 0 0;
-            padding: 10px;
-            transition: transform 0.2s ease;
+            padding: 20px;
+            /* Zmieniamy sposób animacji na filtr, to eliminuje ząbki */
+            transition: all 0.3s ease;
         }
 
+        /* Kontener na logo - usuwa odstępy */
+        .logo-container {
+            margin: 0;
+            line-height: 0;
+            /* To kluczowe: usuwa puste miejsce pod obrazkiem */
+            margin-bottom: 0;
+            /* Idealny odstęp od napisu poniżej */
+        }
+
+        /* Sam obrazek SVG */
+        .logo-img {
+            /* Responsywna wielkość */
+            height: clamp(1.3em, 4vw, 2.2em);
+            width: auto;
+
+            /* 1. KOLOR: Ten filtr zmienia czarny SVG na Twój granat #34346d */
+            filter: invert(9%) sepia(99%) saturate(5569%) hue-rotate(246deg) brightness(68%) contrast(105%);
+
+            /* 2. WYGŁADZANIE: To naprawia pikselozę przy powiększaniu */
+            backface-visibility: hidden;
+            transform: translateZ(0);
+            will-change: transform;
+
+            /* 3. OSTROŚĆ WEKTORÓW (To dodajemy dla idealnych łuków) */
+            shape-rendering: geometricPrecision;
+        }
+
+        /* Animacja po najechaniu - zamiast scale() używamy powiększenia przez font-size lub delikatnego ruchu */
         .brand-link:hover {
             transform: scale(1.05);
         }
 
-        .main-title {
-            font-size: clamp(2.7em, 8vw, 4.5em);
-            font-weight: 900;
-            margin: 0;
-            line-height: 0.8;
-            text-transform: uppercase;
+        /* Dodatkowe wygładzanie dla hovera */
+        .brand-link:hover .logo-img {
+            /* Opcjonalnie: można tu dodać minimalną zmianę jasności */
+            filter: invert(9%) sepia(99%) saturate(5569%) hue-rotate(246deg) brightness(68%) contrast(105%);
         }
+
+        /* --- KONIEC SEKCJI LOGO --- */
 
         .subtitle {
             font-size: clamp(1.1em, 2.5vw, 1.2em);
-            margin: 5px 0 0 0;
+            margin: 0;
             letter-spacing: 2px;
             text-transform: uppercase;
             font-weight: 300;
+            color: var(--text-gray);
+            /* Kolor szary dla tekstu */
+        }
+
+        /* Po najechaniu na całość, podtytuł robi się granatowy */
+        .brand-link:hover .subtitle {
+            color: var(--unisan-blue);
+            transition: color 0.3s ease;
         }
 
         .brand-link::after {
@@ -107,25 +144,17 @@
 
         .gallery-item {
             background: white;
-            padding: 15px 15px 15px 15px;
+            padding: 15px;
             border-radius: 8px;
-
-            /* Ciemnoszara ramka */
             border: 1px solid #bbb;
-
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
             transition: transform 0.2s;
             overflow: hidden;
-
-            /* --- TE TRZY LINIE NAPRAWIAJĄ PROBLEM --- */
             box-sizing: border-box;
-            /* 1. Naprawia uciętą ramkę */
             height: auto;
-            /* 2. Wysokość dopasowana do treści */
             align-self: start;
-            /* 3. Kafelek nie rozciąga się na siłę */
         }
 
         .gallery-item:hover {
@@ -134,7 +163,6 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        /* 1. OBRAZEK - Zabezpieczony styl */
         .img-link {
             display: block;
             text-decoration: none;
@@ -143,24 +171,19 @@
         .gallery-item img {
             width: 100%;
             height: 150px;
-            /* Stała wysokość */
             object-fit: contain;
-            /* Obrazek się skaluje, nie ucina */
             background-color: #fff;
             border-bottom: 1px solid #f0f0f0;
             display: block;
         }
 
-        /* 2. NAZWA PRODUKTU (Nowość) */
         .product-title {
             display: block;
             text-decoration: none;
             color: var(--text-gray);
             font-weight: 600;
-            /* Lekko pogrubione */
             font-size: 0.95em;
             margin: 4px 0 6px 0;
-            /* Odstępy: */
             line-height: 1.1;
         }
 
@@ -168,7 +191,6 @@
             color: var(--unisan-blue);
         }
 
-        /* 3. PRZYCISK */
         .store-btn {
             background-color: var(--unisan-blue);
             color: white;
@@ -182,16 +204,13 @@
             letter-spacing: 0.5px;
             transition: background-color 0.2s, transform 0.1s;
             margin-top: 5px;
-            /* Dodatkowy mały odstęp od tekstu */
         }
 
         footer {
             background-color: #25254d;
-            /* Ciemniejszy odcień granatu dla kontrastu */
             color: #ffffff;
             padding: 12px 20px;
             margin-top: 40px;
-            /* Oddech od galerii */
             font-size: 0.85em;
             line-height: 1.1;
             width: 100%;
@@ -204,7 +223,6 @@
 
         .footer-content {
             max-width: 1000px;
-            /* Spójne z szerokością galerii */
             margin: 0 auto;
             opacity: 0.9;
         }
@@ -214,7 +232,6 @@
             margin-top: 2px;
             font-size: 0.9em;
             opacity: 0.7;
-            /* Lekkie przygaszenie tekstu o cookies */
             font-style: italic;
         }
 
@@ -234,7 +251,9 @@
         alt="Hurtownia hydrauliczna UNISAN Gdańsk" class="header-image">
 
     <a href="https://unisan.net.pl" class="brand-link">
-        <h1 class="main-title">UNISAN</h1>
+        <h1 class="logo-container">
+            <img src="images/logo-unisan.svg" alt="UNISAN - hydrauliczno-sanitarna" class="logo-img">
+        </h1>
         <p class="subtitle">hurtownia hydrauliczno-sanitarna</p>
     </a>
 
@@ -254,143 +273,148 @@
 
         <div class="gallery-grid">
 
-            <!-- SZABLON -->
-
             <div class="gallery-item">
-                <a href="https://www.unisan.net.pl/products/bateria-kuchenna-trojdrozna-flowwt-chrom-do-pure-clever" target="_blank" class="img-link">
-                    <img src="images/bateria-trojdrozna-flowwt.webp" alt="Bateria trójdrożna FlowWT do filtra wody Pure Clever">
+                <a href="https://www.unisan.net.pl/products/bateria-kuchenna-trojdrozna-flowwt-chrom-do-pure-clever"
+                    target="_blank" class="img-link">
+                    <img src="images/bateria-trojdrozna-flowwt.webp"
+                        alt="Bateria trójdrożna FlowWT do filtra wody Pure Clever">
                 </a>
 
-                <a href="https://www.unisan.net.pl/products/bateria-kuchenna-trojdrozna-flowwt-chrom-do-pure-clever" target="_blank" class="product-title">
+                <a href="https://www.unisan.net.pl/products/bateria-kuchenna-trojdrozna-flowwt-chrom-do-pure-clever"
+                    target="_blank" class="product-title">
                     Bateria trójdrożna<br> FlowWT
                 </a>
 
-                <a href="https://www.unisan.net.pl/products/bateria-kuchenna-trojdrozna-flowwt-chrom-do-pure-clever" target="_blank" class="store-btn">
+                <a href="https://www.unisan.net.pl/products/bateria-kuchenna-trojdrozna-flowwt-chrom-do-pure-clever"
+                    target="_blank" class="store-btn">
                     Zobacz w sklepie
                 </a>
             </div>
 
-            <!-- KONIEC SZABLONU -->
-            <!-- SZABLON -->
-
             <div class="gallery-item">
-                <a href="https://www.unisan.net.pl/products/ips-kalyxx-industry-active-uzdatniacz-wody" target="_blank" class="img-link">
-                    <img src="images/uzdatniacz-kalyxx-industry-active.webp" alt="Uzdatniacz i odkamieniacz wody, kołnierzowy, IPS KalyxX Industry Active">
+                <a href="https://www.unisan.net.pl/products/ips-kalyxx-industry-active-uzdatniacz-wody" target="_blank"
+                    class="img-link">
+                    <img src="images/uzdatniacz-kalyxx-industry-active.webp"
+                        alt="Uzdatniacz i odkamieniacz wody, kołnierzowy, IPS KalyxX Industry Active">
                 </a>
 
-                <a href="https://www.unisan.net.pl/products/ips-kalyxx-industry-active-uzdatniacz-wody" target="_blank" class="product-title">
+                <a href="https://www.unisan.net.pl/products/ips-kalyxx-industry-active-uzdatniacz-wody" target="_blank"
+                    class="product-title">
                     Uzdatniacz wody<br> KalyxX Industry Active
                 </a>
 
-                <a href="https://www.unisan.net.pl/products/ips-kalyxx-industry-active-uzdatniacz-wody" target="_blank" class="store-btn">
+                <a href="https://www.unisan.net.pl/products/ips-kalyxx-industry-active-uzdatniacz-wody" target="_blank"
+                    class="store-btn">
                     Zobacz w sklepie
                 </a>
             </div>
 
-            <!-- KONIEC SZABLONU -->
-            <!-- SZABLON -->
-
             <div class="gallery-item">
-                <a href="https://www.unisan.net.pl/products/filtr-wody-pitnej-pure-clever" target="_blank" class="img-link">
-                    <img src="images/filtr-wody-pitnej-pure-clever.webp" alt="System ultrafiltracji - Filtr do wody pitnej Pure Clever">
+                <a href="https://www.unisan.net.pl/products/filtr-wody-pitnej-pure-clever" target="_blank"
+                    class="img-link">
+                    <img src="images/filtr-wody-pitnej-pure-clever.webp"
+                        alt="System ultrafiltracji - Filtr do wody pitnej Pure Clever">
                 </a>
 
-                <a href="https://www.unisan.net.pl/products/filtr-wody-pitnej-pure-clever" target="_blank" class="product-title">
+                <a href="https://www.unisan.net.pl/products/filtr-wody-pitnej-pure-clever" target="_blank"
+                    class="product-title">
                     Filtr do wody pitnej<br> Pure Clever
                 </a>
 
-                <a href="https://www.unisan.net.pl/products/filtr-wody-pitnej-pure-clever" target="_blank" class="store-btn">
+                <a href="https://www.unisan.net.pl/products/filtr-wody-pitnej-pure-clever" target="_blank"
+                    class="store-btn">
                     Zobacz w sklepie
                 </a>
             </div>
 
-            <!-- KONIEC SZABLONU -->
-            <!-- SZABLON -->
-
             <div class="gallery-item">
-                <a href="https://www.unisan.net.pl/products/pompa-zatapialna-z-rozdrabniaczem-do-sciekow" target="_blank" class="img-link">
-                    <img src="images/pompa-zatapialna-rozdrabniacz.webp" alt="Pompa zatapialna do ścieków z rozdrabniaczem Furiatka">
+                <a href="https://www.unisan.net.pl/products/pompa-zatapialna-z-rozdrabniaczem-do-sciekow"
+                    target="_blank" class="img-link">
+                    <img src="images/pompa-zatapialna-rozdrabniacz.webp"
+                        alt="Pompa zatapialna do ścieków z rozdrabniaczem Furiatka">
                 </a>
 
-                <a href="https://www.unisan.net.pl/products/pompa-zatapialna-z-rozdrabniaczem-do-sciekow" target="_blank" class="product-title">
+                <a href="https://www.unisan.net.pl/products/pompa-zatapialna-z-rozdrabniaczem-do-sciekow"
+                    target="_blank" class="product-title">
                     Pompa zatapialna<br> z rozdrabniaczem Furiatka
                 </a>
 
-                <a href="https://www.unisan.net.pl/products/pompa-zatapialna-z-rozdrabniaczem-do-sciekow" target="_blank" class="store-btn">
+                <a href="https://www.unisan.net.pl/products/pompa-zatapialna-z-rozdrabniaczem-do-sciekow"
+                    target="_blank" class="store-btn">
                     Zobacz w sklepie
                 </a>
             </div>
 
-            <!-- KONIEC SZABLONU -->
-            <!-- SZABLON -->
-
             <div class="gallery-item">
-                <a href="https://www.unisan.net.pl/products/uchwyt-duo-m8-10-z-wkladka-gumowa" target="_blank" class="img-link">
+                <a href="https://www.unisan.net.pl/products/uchwyt-duo-m8-10-z-wkladka-gumowa" target="_blank"
+                    class="img-link">
                     <img src="images/uchwyt-duo-m8m10-guma.webp" alt="Uchwyt DUO z wkładką gumową EPDM M8/M10">
                 </a>
 
-                <a href="https://www.unisan.net.pl/products/uchwyt-duo-m8-10-z-wkladka-gumowa" target="_blank" class="product-title">
+                <a href="https://www.unisan.net.pl/products/uchwyt-duo-m8-10-z-wkladka-gumowa" target="_blank"
+                    class="product-title">
                     Uchwyt DUO M8/M10<br> z wkładką gumową
                 </a>
 
-                <a href="https://www.unisan.net.pl/products/uchwyt-duo-m8-10-z-wkladka-gumowa" target="_blank" class="store-btn">
+                <a href="https://www.unisan.net.pl/products/uchwyt-duo-m8-10-z-wkladka-gumowa" target="_blank"
+                    class="store-btn">
                     Zobacz w sklepie
                 </a>
             </div>
 
-            <!-- KONIEC SZABLONU -->
-            <!-- SZABLON -->
-
             <div class="gallery-item">
-                <a href="https://www.unisan.net.pl/products/filtry-pp-c1-c2-do-pure-clever" target="_blank" class="img-link">
-                    <img src="images/filtry-do-wody-pure-clever.webp" alt="Zestaw wkładów filtrujących PP C1 C2 do filtra wody Pure Clever">
+                <a href="https://www.unisan.net.pl/products/filtry-pp-c1-c2-do-pure-clever" target="_blank"
+                    class="img-link">
+                    <img src="images/filtry-do-wody-pure-clever.webp"
+                        alt="Zestaw wkładów filtrujących PP C1 C2 do filtra wody Pure Clever">
                 </a>
 
-                <a href="https://www.unisan.net.pl/products/filtry-pp-c1-c2-do-pure-clever" target="_blank" class="product-title">
+                <a href="https://www.unisan.net.pl/products/filtry-pp-c1-c2-do-pure-clever" target="_blank"
+                    class="product-title">
                     Wkłady filtrujące<br> do Pure Clever
                 </a>
 
-                <a href="https://www.unisan.net.pl/products/filtry-pp-c1-c2-do-pure-clever" target="_blank" class="store-btn">
+                <a href="https://www.unisan.net.pl/products/filtry-pp-c1-c2-do-pure-clever" target="_blank"
+                    class="store-btn">
                     Zobacz w sklepie
                 </a>
             </div>
 
-            <!-- KONIEC SZABLONU -->
-            <!-- SZABLON -->
-
             <div class="gallery-item">
-                <a href="https://www.unisan.net.pl/products/ips-kalyxx-redline-odkamieniacz" target="_blank" class="img-link">
-                    <img src="images/odkamieniacz-kalyxx-redline.webp" alt="Odkamieniacz wody IPS KalyxX RedLine - opatentowana technologia TGP">
+                <a href="https://www.unisan.net.pl/products/ips-kalyxx-redline-odkamieniacz" target="_blank"
+                    class="img-link">
+                    <img src="images/odkamieniacz-kalyxx-redline.webp"
+                        alt="Odkamieniacz wody IPS KalyxX RedLine - opatentowana technologia TGP">
                 </a>
 
-                <a href="https://www.unisan.net.pl/products/ips-kalyxx-redline-odkamieniacz" target="_blank" class="product-title">
+                <a href="https://www.unisan.net.pl/products/ips-kalyxx-redline-odkamieniacz" target="_blank"
+                    class="product-title">
                     IPS KalyxX RedLine<br> odkamieniacz wody
                 </a>
 
-                <a href="https://www.unisan.net.pl/products/ips-kalyxx-redline-odkamieniacz" target="_blank" class="store-btn">
+                <a href="https://www.unisan.net.pl/products/ips-kalyxx-redline-odkamieniacz" target="_blank"
+                    class="store-btn">
                     Zobacz w sklepie
                 </a>
             </div>
 
-            <!-- KONIEC SZABLONU -->
-            <!-- SZABLON -->
-
             <div class="gallery-item">
-                <a href="https://www.unisan.net.pl/products/bateria-umywalkowa-dokos-wysoka-boczny-mieszacz" target="_blank" class="img-link">
-                    <img src="images/bateria-umywalkowa-dokos.webp" alt="Bateria umywalkowa wysoka Dokos z bocznym mieszaczem">
+                <a href="https://www.unisan.net.pl/products/bateria-umywalkowa-dokos-wysoka-boczny-mieszacz"
+                    target="_blank" class="img-link">
+                    <img src="images/bateria-umywalkowa-dokos.webp"
+                        alt="Bateria umywalkowa wysoka Dokos z bocznym mieszaczem">
                 </a>
 
-                <a href="https://www.unisan.net.pl/products/bateria-umywalkowa-dokos-wysoka-boczny-mieszacz" target="_blank" class="product-title">
+                <a href="https://www.unisan.net.pl/products/bateria-umywalkowa-dokos-wysoka-boczny-mieszacz"
+                    target="_blank" class="product-title">
                     Bateria umywalkowa<br> Dokos wysoka
                 </a>
 
-                <a href="https://www.unisan.net.pl/products/bateria-umywalkowa-dokos-wysoka-boczny-mieszacz" target="_blank" class="store-btn">
+                <a href="https://www.unisan.net.pl/products/bateria-umywalkowa-dokos-wysoka-boczny-mieszacz"
+                    target="_blank" class="store-btn">
                     Zobacz w sklepie
                 </a>
             </div>
-
-            <!-- KONIEC SZABLONU -->
-
 
         </div>
     </section>
